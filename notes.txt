@@ -1,0 +1,15 @@
+Try to add rows from a db to json:
+
+et queryResults = returnedQueryData // data returned from SQL query
+let jsonarray = {}
+
+for (row in queryResults) {
+  jsonarray[row.id] = {
+    id: row['id'],
+    username: row['username'],
+    email: row['email']
+  }
+}
+  Object.keys(jsonarray).forEach(e => {
+    // Here e is the object element from the JSON array
+})

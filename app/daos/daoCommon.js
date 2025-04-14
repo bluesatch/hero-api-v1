@@ -33,6 +33,22 @@ const dao = {
                 }
             }
         )
+    },
+    sortGeneral: (res, table)=> {
+        con.query(
+            `SELECT * FROM ${table} ORDER BY ${table};`,
+            (error, rows)=> {
+                if (!error) {
+                    if (rows.length === 1) {
+                        res.json(...rows)
+                    } else {
+                        res.json(rows)
+                    }
+                } else {
+                    console.log(`DAO ERROR: ${table}`, error )
+                }
+            }
+        )
     }
 }
 
