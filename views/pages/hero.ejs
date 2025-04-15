@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="heroMain">
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <div class="row row-cols-1 row-cols-md-4 row-cols-lg-5 g-4">
+                    <% data.forEach(hero => { %>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="https://placehold.co/300x180" alt="hero image" class="img-fluid image card-img-top" />
+                                <div class="card-body">
+                                    <h2 class="card-title">
+                                        <% if (hero.hero_name == null) { %>
+                                            <%= hero.first_name %> <%= hero.last_name %>
+                                        <%} else { %>
+                                            <%= hero.hero_name %>
+                                        <% } %>
+                                    </h2>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="/heroes/<%= hero.hero_id %>" class="card-link">view more</a>
+                                </div>
+                            </div>
+                        </div>
+                    <%}) %>
+                </div>
+            </div>
+            <div class="col-2">
+                <%- include('../partials/heroAside') %>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

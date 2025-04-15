@@ -1,0 +1,15 @@
+<aside class="aside" id="heroAside">
+    <ul class="list-group list-group-flush" id="heroList">
+        <% asideData.forEach(hero => { %>
+            <li class="list-group-item hero-list-item">
+                <a href="/heroes/<%= hero.hero_id %>" class="list-group-link hero-list-link">
+                    <% if (hero.hero_name == null) { %>
+                        <%= hero.first_name %> <%= hero.last_name %>
+                    <% } else { %>
+                        <%= hero.hero_name %>
+                    <% } %>
+                </a>
+            </li>
+        <%}) %>
+    </ul>
+</aside>
