@@ -3,14 +3,38 @@
 <main class="main" id="heroSingleMain">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <h2>Powers</h2>
-                
+            <div class="col-3">
+                <% if (data.alias != null) { %>
+                    <h2 class="hero-single-h2">Alias: <%= data.alias %></h2>
+                <% } %>
+                <h2 class="hero-single-h2">Powers</h2>
+                <ul class="list-group list-group-flush" id="heroPowersList">
+                    <% data.powers.forEach(heroPower => { %>
+                        <li class="list-group-item heropower-list-item">
+                            <%= heroPower %>
+                        </li>
+                    <% }) %>
+                </ul>
             </div>
-            <div class="col-md-7">
-                <img src="https://placehold.co/50x50" alt="placeholder img" class="img-fluid image" />
+            <div class="col-7">
+                <img src="https://placehold.co/450x550" alt="placeholder img" class="img-fluid image hero-single-image" />
             </div>
-            <div class="col-md-2">
+            <div class="col-2">
+                <nav aria-label="navigation">
+                    <ul class="pagination">
+                        <% if (data.hero_id > 1) { %>
+                            <li class="page-item">
+                                <a href="/heroes/<%= data.hero_id - 1 %>" class="page-link">Prev</a>
+                            </li>
+                        <%} %>
+
+                        <% if (data.hero_id < count) { %>
+                            <li class="page-item">
+                                <a href="/heroes/<%= data.hero_id + 1 %>" class="page-link">Next</a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </nav>
                 <%- include('../partials/heroAside') %>
             </div>
         </div>

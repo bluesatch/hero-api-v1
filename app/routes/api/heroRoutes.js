@@ -13,7 +13,6 @@ router.get('/alignment/:alignment', (req, res)=> {
     dao.findByAlignment(res, dao.table, req.params.alignment)
 })
 
-
 //sort 
 router.get('/sort', (req, res)=> {
     dao.sort(res, dao.table)
@@ -21,10 +20,6 @@ router.get('/sort', (req, res)=> {
 // findById
 router.get('/:id', (req, res)=> {
     dao.findHeroById(res, dao.table, req.params.id)
-})
-
-router.get('/:id/power', (req, res)=> {
-    dao.findHeroPowers(res, dao.table, req.params.id)
 })
 
 module.exports = router

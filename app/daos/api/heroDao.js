@@ -37,7 +37,6 @@ const heroDao = {
             WHERE ${table}.hero_id = ${id};`,
             (error, rows)=> {
                 if (!error) {
-                    console.log(Object.values(rows))
 
                     Object.values(rows).forEach(obj => {
                         powers.push(obj.power)

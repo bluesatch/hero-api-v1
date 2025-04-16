@@ -17,13 +17,15 @@ endpoints.forEach(endpoint => {
     router.use(`/api/${endpoint}`, require(`./api/${endpoint}Routes`))
 })
 
-// heroAside data
+// heroAside data and count
 let heroAsideData = []
+let heroCount = 0
 
 axios.get(`http://localhost:${PORT}/api/hero/sort`)
-.then(resp => heroAsideData = resp.data)
-
-
+.then(resp => {
+    heroAsideData = resp.data
+    heroCount = resp.data.length
+})
 
 // 3 
 // router.get(path, callback function)
@@ -91,23 +93,43 @@ router.get('/heroes/:id', (req, res)=> {
     // let heroPowers = []
     const url = `http://localhost:${PORT}/api/hero/${id}`
 
-    // const powerUrl = `http://localhost:${PORT}/api/hero/${id}/power`
-
-    // axios.get(powerUrl)
-    // .then(resp => heroPowers = resp.data)
-
     axios.get(url)
     .then(resp => {
 
         let heroName = resp.data.hero_name == null ? `${resp.data.first_name} ${resp.data.last_name}` : resp.data.hero_name
+
         res.render('pages/heroSingle', {
             title: heroName,
             name: heroName,
             data: resp.data,
             asideData: heroAsideData,
-            // heroPowers
+            count: heroCount
+
         })
     })
+})
+
+// subpages
+
+const subData = ['power', 'franchise', 'team', 'species']
+
+subData.forEach(dataPoint => {
+
+    router.get(`/${dataPoint}`, (req, res)=> {
+        const url = `http://localhost:${PORT}/api/${dataPoint}`
+    
+        axios.get(url)
+        .then(resp => {
+
+            res.render('pages/allData', {
+                title: dataPoint,
+                name: `All ${dataPoint}`,
+                data: resp.data
+            })
+        })
+
+    })
+
 })
 
 
