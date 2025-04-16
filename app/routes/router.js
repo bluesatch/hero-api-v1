@@ -23,6 +23,8 @@ let heroAsideData = []
 axios.get(`http://localhost:${PORT}/api/hero/sort`)
 .then(resp => heroAsideData = resp.data)
 
+
+
 // 3 
 // router.get(path, callback function)
 router.get('/', (req, res)=> {
@@ -86,7 +88,13 @@ router.get('/heroes', (req, res)=> {
 router.get('/heroes/:id', (req, res)=> {
 
     const id = req.params.id 
+    // let heroPowers = []
     const url = `http://localhost:${PORT}/api/hero/${id}`
+
+    // const powerUrl = `http://localhost:${PORT}/api/hero/${id}/power`
+
+    // axios.get(powerUrl)
+    // .then(resp => heroPowers = resp.data)
 
     axios.get(url)
     .then(resp => {
@@ -96,7 +104,8 @@ router.get('/heroes/:id', (req, res)=> {
             title: heroName,
             name: heroName,
             data: resp.data,
-            asideData: heroAsideData
+            asideData: heroAsideData,
+            // heroPowers
         })
     })
 })
